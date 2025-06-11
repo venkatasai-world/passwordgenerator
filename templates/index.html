@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Generator</title>
+    <style>
+        body {
+            background-color: #1c1c1c;
+            color: #f1f1f1;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #00ff88;
+        }
+        form {
+            margin-top: 30px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 80px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 30px;
+            font-size: 18px;
+            background-color: #00ff88;
+            border: none;
+            color: #1c1c1c;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 40px;
+            font-size: 20px;
+            color: #ffaa00;
+        }
+        .copy-btn {
+            margin-top: 10px;
+            background-color: #ffaa00;
+            color: #1c1c1c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Password Generator</h1>
+    <form method="post">
+        <div>
+            <label>Letters:</label>
+            <input type="number" name="letters" required min="0" value="4">
+        </div>
+        <div>
+            <label>Symbols:</label>
+            <input type="number" name="symbols" required min="0" value="2">
+        </div>
+        <div>
+            <label>Numbers:</label>
+            <input type="number" name="numbers" required min="0" value="2">
+        </div>
+        <button type="submit">Generate Password</button>
+    </form>
+
+    {% if password %}
+    <div class="result">
+        <p><strong>Generated Password:</strong></p>
+        <p id="passwordText">{{ password }}</p>
+        <button class="copy-btn" onclick="copyPassword()">Copy</button>
+    </div>
+    {% endif %}
+
+    <script>
+        function copyPassword() {
+            const passwordText = document.getElementById("passwordText").innerText;
+            navigator.clipboard.writeText(passwordText).then(function() {
+                alert("Password copied to clipboard!");
+            }, function(err) {
+                alert("Failed to copy: " + err);
+            });
+        }
+    </script>
+</body>
+</html>
